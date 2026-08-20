@@ -1,0 +1,38 @@
+name: Build & Release Extension
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Package Extension ZIP
+        run: |
+          VERSION="${{ github.ref_name }}"
+          ZIP_NAME="idm-smart-controller-${VERSION}.zip"
+          
+          # 打包核心扩展文件，排除仓库配置文件与隐藏文件
+          zip -r "${ZIP_NAME}" . -x "*.git*" ".github/*" ".gitignore" "*.DS_Store" "README.md"
+          
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Release ${{ github.ref_name }}"
+          files: ${{ env.ZIP_NAME }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
