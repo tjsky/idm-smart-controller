@@ -1,15 +1,14 @@
-name: Build & Release Extension
+name: Build & Attach Release Asset
 
 on:
-  push:
-    tags:
-      - "v*"
+  release:
+    types: [published]
 
 permissions:
   contents: write
 
 jobs:
-  build-and-release:
+  build-and-upload:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,21 +17,17 @@ jobs:
 
       - name: Package Extension ZIP
         run: |
-          VERSION="${{ github.ref_name }}"
+          VERSION="${{ github.event.release.tag_name }}"
           ZIP_NAME="idm-smart-controller-${VERSION}.zip"
-
-          # 唉，用白名单打包文件吧
+          
+          # 打包白名单文件
           zip -r "${ZIP_NAME}" manifest.json background.js options.html options.js
-
+          
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
 
-      - name: Create GitHub Release
+      - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
-          name: "Release ${{ github.ref_name }}"
           files: ${{ env.ZIP_NAME }}
-          draft: false
-          prerelease: false
-          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
