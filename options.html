@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>IDM 智能管理器设置</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; max-width: 680px; margin: 30px auto; padding: 0 20px; color: #1e293b; line-height: 1.5; }
+    h2 { margin-bottom: 4px; }
+    .subtitle { color: #64748b; font-size: 14px; margin-top: 0; margin-bottom: 24px; }
+    .section-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+    .desc { color: #64748b; font-size: 13px; margin-top: 0; margin-bottom: 8px; }
+    .ext-list { max-height: 220px; overflow-y: auto; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; margin-bottom: 20px; background: #f8fafc; }
+    .ext-item { display: flex; align-items: center; padding: 6px 8px; border-radius: 6px; cursor: pointer; user-select: none; }
+    .ext-item:hover { background: #e2e8f0; }
+    .ext-item input { margin-right: 10px; cursor: pointer; width: 16px; height: 16px; }
+    .ext-icon { width: 22px; height: 22px; margin-right: 10px; border-radius: 4px; object-fit: contain; }
+    .ext-name { font-size: 14px; font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ext-id { font-size: 11px; color: #94a3b8; font-family: monospace; margin-left: 8px; }
+    textarea { width: 100%; height: 140px; box-sizing: border-box; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: monospace; font-size: 13px; resize: vertical; margin-bottom: 16px; }
+    .actions { display: flex; align-items: center; gap: 12px; }
+    button { padding: 8px 24px; background-color: #2563eb; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; }
+    button:hover { background-color: #1d4ed8; }
+    #status { font-size: 14px; color: #16a34a; }
+  </style>
+</head>
+<body>
+  <h2>IDM 智能管理器</h2>
+  <p class="subtitle">根据标签页访问情况，自动启停指定的下载器或冲突扩展。</p>
+
+  <div class="section-title">1. 选择需要自动管辖的扩展（支持多选）</div>
+  <p class="desc">勾选需要自动启停的扩展列表（默认已选择 IDM）：</p>
+  <div class="ext-list" id="ext-container">
+    <div style="padding: 10px; color: #94a3b8; text-align: center;">正在读取已安装扩展...</div>
+  </div>
+
+  <div class="section-title">2. 触发自动禁用的 URL 规则</div>
+  <p class="desc">每行输入一个域名或 URL 关键字。只要存在匹配标签页，上述勾选的扩展将被批量禁用：</p>
+  <textarea id="rules" placeholder="例如：&#10;pixiv.net&#10;x.com&#10;twitter.com&#10;instagram.com"></textarea>
+
+  <div class="actions">
+    <button id="save">保存所有设置</button>
+    <span id="status"></span>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

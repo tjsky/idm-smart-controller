@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "IDM 智能管理器",
+  "version": "1.0",
+  "description": "监控特定标签页并自动启停 IDM，支持快捷键与状态指示",
+  "permissions": [
+    "management",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "点击切换 IDM 状态 (右键进入选项设置网址)"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "toggle-idm": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "切换 IDM 启用状态"
+    }
+  }
+}
