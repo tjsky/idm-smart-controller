@@ -1,4 +1,4 @@
-# IDM Smart Controller (IDM 智能调度器)
+# IDM Smart Controller (IDM 智能管理器)
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-blue.svg)](https://developer.chrome.com/docs/extensions/mv3/intro/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -14,7 +14,7 @@ IDM 官方扩展（IDM Integration Module）在嗅探音视频时非常实用，
 - **元数据丢失**：SingleFile 或批量下载扩展通过 `blob:` / `data:` 生成文件时，IDM 强行抢占会导致自定义路径与规范文件名失效，沦为随机哈希名直接保存到默认下载目录。
 - **协议限制**：IDM 客户端内置的排除列表仅支持标准网络协议（`http`/`https`），无法过滤扩展内部发起的下载。
 
-**IDM Smart Controller** 采用“以扩展治扩展”的思路，通过 Chrome `management` API 对 IDM 扩展实施精准调度。
+**IDM Smart Controller** 采用“以扩展治扩展”的思路，通过 Chrome `management` API 对 IDM 扩展实施精准管理。
 
 ---
 
